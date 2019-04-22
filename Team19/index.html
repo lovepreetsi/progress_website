@@ -114,9 +114,28 @@
 				<div class="col-md-6">
 					<div class="row services-item text-center wow flipInX" data-toggle="modal" data-target="#c4" data-wow-offset="20">
 						<i class="fa icon-coffee icon-3x"></i>
-						<h4>Prototype</h4>
+						<h4>Design</h4>
 					</div>
 				</div>
+			
+					<div class="col-md-6">
+							<div class="row services-item text-center wow flipInX" data-toggle="modal" data-target="#c5" data-wow-offset="10">
+								<i class="fa icon-dashboard icon-3x"></i>
+								<h4>Testing</h4>
+							</div>
+						</div>
+						<div class="col-md-6">
+								<div class="row services-item text-center wow flipInX" data-toggle="modal" data-target="#c6" data-wow-offset="10">
+									<i class="fa icon-dashboard icon-3x"></i>
+									<h4>Evaluation</h4>
+								</div>
+						</div>
+						<div class="col-md-6">
+									<div class="row services-item text-center wow flipInX" data-toggle="modal" data-target="#c7" data-wow-offset="10">
+										<i class="fa icon-dashboard icon-3x"></i>
+										<h4>Management</h4>
+									</div>
+						</div>
 			</div>
 		</div>
 	</div>
@@ -256,6 +275,10 @@
 								This doesn't mean that the solutions that are out there didn't help us. We were able to look at the design of the websites or in short the conventions that were used so that the same conventions are used within our system.
 								Also regarding the viewing of the CT scans on HoloLens we will have to make sure the steps are easy to follow.
 							</p>
+							</li>
+
+
+
 
 							<li>
 							<h5>Related technologies</h5>
@@ -275,7 +298,53 @@
 
 							</p>
 
-							<li>
+						</li>
+
+
+						
+							<h5 align = 'center'>HoloBackend</h5>
+							<p>
+								<h5>Backend Description:<h5>
+								<p>
+										The HoloBackend is basically composed of some restful api, which uses http requests to process the data.
+									Objects processed by those api all store in the Azure Blob DataBase, and they are actually .mhif file format.
+									Mhif file is exactlly xml file, but follow a detemined schema to building up. Each mhif file actuallu store one 
+									patient's information , and using an unique patietnId to label each patient.Restful api could analyisi those file and extract the 
+									information according to the http request from front end.
+								</p>
+							</p>
+							<p>
+								<li>All the techniques in the backend</li>
+								<img src="picture/backend.png" width="500" height="400">
+							</p>
+							
+							<p>
+								<h5>	Why Java Jersey</h5>
+								<p>
+										Using Java Jersey to build up the Restful Service have so many advantages, for example, the consumer only needs 
+									to know the URI of the root resource of the service, then they could boot from the root resourse to the required 
+									resource.And Java Jersey uses the Annoatatin Mechanism, so all HTTP-related parameter settings are implemented using 
+									annotations(GET,POST,PUT,DELETE,etc). From @Produces(MediaType.Applications.JSON) i could return the json data to the front 
+									end, which is very convient and powerful.Also in this peoject, we need to parse xml file, in order to cooperate with DOM4J, which actually
+									an efficient but a little bit complex xml parsing tools, java jersey could greatly reduce the complexity of the code.
+								</p>
+
+								<h5>	Why DOM4J</h5>
+								<p>
+											The mechanism of DOM4J is loading the whole xml file into a document tree in memory , and each node of the tree represent one element
+										in xml file, so it is easy to operate the whole file, it supports deletion, modification, rearrangement and other functions,so the access 
+										efficieny is high. So for filtering the data, DOM4J is one of the best choice. One of the other alternative library is SAX xml parse tools,
+										this one is applied to large XML documents, and in this project all the mhif file are very large, so this one also could be a good choice, 
+										unfortunately, sax only supports reading with low access efficiency, so that is not easy to retrieve information by using sax.
+								</p>
+								<h5> 	Why Azure Blob Storage</h5>
+								<p>
+											Since our project is a pipline conversion for the HoloCT project, and that project used the azure blob storage, so we must need to use the
+										same database.
+								</p>
+							</p>
+					
+						
 							<h5>References</h5>
 							<p>
 								<li>https://www.slant.co/options/5655/alternatives/~microsoft-hololens-alternatives – for deciding alternatives </li>
@@ -345,7 +414,7 @@
 		</div>
 		<div id="c4" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
 				<div class="modal-header">
-					<h1>Prototype</h1>
+					<h1>Design</h1>
 				</div>
 				<div class="modal-body">
 					<div class="container modal-container">
@@ -375,13 +444,7 @@
 											For the implementation of finished functionalities , we make a summary for that.
 											The list below display what functionalities we just finished.
 										</p>
-										<br>
-										<p>1. A responsive web layout implemented using bootstrap in React</p>
-										<br>
-										<p>2. Ability to search using tags</p>
-										<br>
-										<p>3. Ability to test the site locally using a Tomcat server and POST requests
-
+									
 									</ul>
 
 						</div>
@@ -390,6 +453,87 @@
 				<div class="modal-back">
 					<a data-dismiss="modal" title="返回上一页"><i class="fa icon-angle-left"></i></a>
 				</div>
+			</div>
+
+
+
+
+			<div id="c5" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+					<div class="modal-header">
+							<h1>Testing</h1>
+					</div>
+					<div class="modal-body">
+							<div class="container modal-container">
+								<button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="close-img"></i></button>
+								<div class="modal-services-content">
+										<ul><br>
+												<li>
+												<h5>Testing Strategy </h5>
+												<p>
+														In this project, there are two main methods of testing, one is unit testing at the code level, 
+														and the other is integration testing, both of them could cover most of the user input.
+												</p>
+												<p>
+															1.Unit testing:
+															In unit test, we test the backend by using the Junit Library and JerseyTest , ResourceConfig library,
+														during every unit test,ResourceConfig will try to get the resources returned by the interface, and in the unit test, 
+														we compare the returned resources with our pre-set expectations. If they are equal, the interface works correctly,
+														 and then we cover as much as possible input, making the test more credible.
+												</p>
+
+												<p>			2.Integration testing:
+															In integration test, we connect the front end and the back end and falsify the same resources as real 
+														data to test whether the entire system is working properly.
+												</p>
+
+												<p>
+													3.Responsive design testing:
+
+												</p>
+
+												<p>
+													4.Performance testing:
+														The WebApp could dynamic search up to three conditions, so in this testing, we just test  different combinations of inputs.
+												</p>
+
+												<p>
+													5.User acceptance testing:
+
+												</p>
+													
+												
+								
+
+												
+									
+		
+											</ul>
+		
+								</div>
+							</div>
+						</div>
+
+					<div class="modal-back">
+							<a data-dismiss="modal" title="返回上一页"><i class="fa icon-angle-left"></i></a>
+						</div>
+			</div>
+
+			<div id="c6" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+					<div class="modal-header">
+							<h1>Evaluation</h1>
+					</div>
+					<div class="modal-back">
+							<a data-dismiss="modal" title="返回上一页"><i class="fa icon-angle-left"></i></a>
+						</div>
+			</div>
+
+			<div id="c7" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+					<div class="modal-header">
+							<h1>Management</h1>
+					</div>
+					<div class="modal-back">
+							<a data-dismiss="modal" title="返回上一页"><i class="fa icon-angle-left"></i></a>
+						</div>
 			</div>
 </div>
 </section><section id="team" class="team content-section">
